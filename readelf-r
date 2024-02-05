@@ -1,0 +1,12 @@
+
+Relocation section '.rel.dyn' at offset 0x364 contains 1 entry:
+ Offset     Info    Type            Sym.Value  Sym. Name
+0804bffc  00000406 R_386_GLOB_DAT    00000000   __gmon_start__
+
+Relocation section '.rel.plt' at offset 0x36c contains 5 entries:
+ Offset     Info    Type            Sym.Value  Sym. Name
+0804c00c  00000107 R_386_JUMP_SLOT   00000000   printf@GLIBC_2.0
+0804c010  00000207 R_386_JUMP_SLOT   00000000   test_a
+0804c014  00000307 R_386_JUMP_SLOT   00000000   test_c
+0804c018  00000507 R_386_JUMP_SLOT   00000000   __libc_start_main@GLIBC_2.0
+0804c01c  00000607 R_386_JUMP_SLOT   00000000   test_b
