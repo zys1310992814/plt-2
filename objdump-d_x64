@@ -151,14 +151,14 @@ Disassembly of section .text:
   4011bd:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
   4011c1:	48 8b 00             	mov    (%rax),%rax
   4011c4:	48 89 c6             	mov    %rax,%rsi
-  4011c7:	48 8d 05 a2 0e 00 00 	lea    0xea2(%rip),%rax        # 402070 <_IO_stdin_used+0x70>
+  4011c7:	48 8d 05 aa 0e 00 00 	lea    0xeaa(%rip),%rax        # 402078 <_IO_stdin_used+0x78>
   4011ce:	48 89 c7             	mov    %rax,%rdi
   4011d1:	b8 00 00 00 00       	mov    $0x0,%eax
   4011d6:	e8 85 fe ff ff       	call   401060 <printf@plt>
   4011db:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
   4011df:	48 8b 00             	mov    (%rax),%rax
   4011e2:	48 89 c6             	mov    %rax,%rsi
-  4011e5:	48 8d 05 bc 0e 00 00 	lea    0xebc(%rip),%rax        # 4020a8 <_IO_stdin_used+0xa8>
+  4011e5:	48 8d 05 c4 0e 00 00 	lea    0xec4(%rip),%rax        # 4020b0 <_IO_stdin_used+0xb0>
   4011ec:	48 89 c7             	mov    %rax,%rdi
   4011ef:	b8 00 00 00 00       	mov    $0x0,%eax
   4011f4:	e8 67 fe ff ff       	call   401060 <printf@plt>
