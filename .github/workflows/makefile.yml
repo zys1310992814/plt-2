@@ -15,4 +15,6 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Install dependencies
-      run: make test
+      run: |
+            sudo apt install libc6-dev
+            make test
