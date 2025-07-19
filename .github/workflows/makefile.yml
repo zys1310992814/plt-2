@@ -17,7 +17,8 @@ jobs:
     - name: Install dependencies
       run: |
             TUNA_MIRROR=" https://mirrors.tuna.tsinghua.edu.cn/ubuntu "  # 清华源主地址（HTTPS）
-            sudo cat << EOF > /etc/apt/sources.list
+            sudo su
+            cat << EOF > /etc/apt/sources.list
             # 清华大学开源软件镜像站（Ubuntu $codename）
             deb ${TUNA_MIRROR}/ubuntu/ $codename main restricted universe multiverse
             deb-src ${TUNA_MIRROR}/ubuntu/ $codename main restricted universe multiverse
