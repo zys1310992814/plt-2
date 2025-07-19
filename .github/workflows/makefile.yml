@@ -60,7 +60,7 @@ jobs:
         uses: heinrichreimer/github-changelog-generator-action@v2.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}  # 必须，用于访问 GitHub API
-          #release-sections: '## What\'s Changed'  # 自定义变更日志格式
+          release-sections: '## What iss Changed'  # 自定义变更日志格式
           output-file: 'CHANGELOG.md'  # 输出到 CHANGELOG.md
           since-tag: ${{ github.ref_name }}  # 仅生成当前标签后的变更（可选）
 
