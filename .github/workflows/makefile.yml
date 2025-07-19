@@ -1,19 +1,30 @@
 name: Makefile CI
 
 on:
+  # 触发条件：推送以 v 开头的标签（如 v1.0.0）
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    tags:
+      - 'v*'
+  # 可选：允许手动触发（调试用）
+  workflow_dispatch:
 
 jobs:
-  build:
+  build-and-release:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      # --------------------------
+      # 步骤 1：检出代码（获取完整提交历史）
+      # --------------------------
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 必须设置为 0，否则无法生成完整的变更日志
 
+      # --------------------------
+      # 步骤 2：设置环境
+      # --------------------------
     - name: Install dependencies
       run: |
           TUNA_SOURCE=" https://mirrors.tuna.tsinghua.edu.cn/ubuntu "
@@ -44,11 +55,29 @@ jobs:
           sudo apt-get install -y libc6-dev-i386 build-essential
           make test
 
-    - name: Create Release
-      uses: softprops/action-gh-release@v1  # 推荐使用此 Action
-      with:
-        tag_name: 'v1'  # 自动使用触发标签（如 v1.0.0）
-        name: 'Release v1'  # Release 名称（可选）
-        files: test  # 上传 dist 目录下的所有文件作为附件
-        draft: false  # 是否为草稿（false 表示直接发布）
-        prerelease: false  # 是否为预发布（根据标签前缀判断，如 v1.0.0-rc1 设为 true）
+    # --------------------------
+      # 步骤 5：生成变更日志（CHANGELOG.md）
+      # --------------------------
+      - name: Generate changelog
+        if: github.ref_type == 'tag'
+        uses: heinrichreimer/github-changelog-generator-action@v2.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # 必须，用于访问 GitHub API
+          release-sections: '## What\'s Changed'  # 自定义变更日志格式
+          output-file: 'CHANGELOG.md'  # 输出到 CHANGELOG.md
+          since-tag: ${{ github.ref_name }}  # 仅生成当前标签后的变更（可选）
+
+      # --------------------------
+      # 步骤 6：创建 GitHub Release 并上传资产
+      # --------------------------
+      - name: Create Release
+        if: github.ref_type == 'tag'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}  # 自动使用触发标签（如 v1.0.0）
+          name: 'Release ${{ github.ref_name }}'  # Release 名称（可选）
+          body_path: CHANGELOG.md  # 从文件读取变更日志
+          files: dist/packages/*  # 上传打包后的产物
+          draft: false  # 直接发布（非草稿）
+          prerelease: ${{ contains(github.ref_name, '-') }}  # 标签含 '-' 则为预发布（如 v1.0.0-rc1）
+          target_commitish: main  # 关联 main 分支的最新提交
