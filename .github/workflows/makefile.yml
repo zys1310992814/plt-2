@@ -49,7 +49,6 @@ jobs:
       with:
         tag_name: 'v1'  # 自动使用触发标签（如 v1.0.0）
         name: 'Release v1'  # Release 名称（可选）
-        body_path: CHANGELOG.md  # 从文件读取变更日志
         files: test  # 上传 dist 目录下的所有文件作为附件
         draft: false  # 是否为草稿（false 表示直接发布）
         prerelease: false  # 是否为预发布（根据标签前缀判断，如 v1.0.0-rc1 设为 true）
