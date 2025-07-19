@@ -16,21 +16,26 @@ jobs:
 
     - name: Install dependencies
       run: |
-            TUNA_MIRROR=" https://mirrors.tuna.tsinghua.edu.cn/ubuntu "  # 清华源主地址（HTTPS）
-            sudo su
-            cat << EOF > /etc/apt/sources.list
-            # 清华大学开源软件镜像站（Ubuntu $codename）
-            deb ${TUNA_MIRROR}/ubuntu/ $codename main restricted universe multiverse
-            deb-src ${TUNA_MIRROR}/ubuntu/ $codename main restricted universe multiverse
+          # 清华源主地址（HTTPS）
+          TUNA_SOURCE=" https://mirrors.tuna.tsinghua.edu.cn/ubuntu "
+          CODENAME=$(lsb_release -cs)  # 获取 Ubuntu 代号（如 jammy/22.04）
 
-            deb ${TUNA_MIRROR}/ubuntu/ $codename-updates main restricted universe multiverse
-            deb-src ${TUNA_MIRROR}/ubuntu/ $codename-updates main restricted universe multiverse
+          # 生成新的 sources.list 内容
+          sudo tee /etc/apt/sources.list <<EOF
+          # 清华大学开源软件镜像站（Ubuntu $CODENAME）
+          deb ${TUNA_SOURCE}/ubuntu/ $CODENAME main restricted universe multiverse
+          deb-src ${TUNA_SOURCE}/ubuntu/ $CODENAME main restricted universe multiverse
 
-            deb ${TUNA_MIRROR}/ubuntu/ $codename-backports main restricted universe multiverse
-            deb-src ${TUNA_MIRROR}/ubuntu/ $codename-backports main restricted universe multiverse
+          deb ${TUNA_SOURCE}/ubuntu/ $CODENAME-updates main restricted universe multiverse
+          deb-src ${TUNA_SOURCE}/ubuntu/ $CODENAME-updates main restricted universe multiverse
 
-            deb ${TUNA_MIRROR}/ubuntu/ $codename-security main restricted universe multiverse
-            deb-src ${TUNA_MIRROR}/ubuntu/ $codename-security main restricted universe multiverse
-            EOF
-            sudo apt install libc6-dev-i386 build-essential
-            make test
+          deb ${TUNA_SOURCE}/ubuntu/ $CODENAME-backports main restricted universe multiverse
+          deb-src ${TUNA_SOURCE}/ubuntu/ $CODENAME-backports main restricted universe multiverse
+
+          deb ${TUNA_SOURCE}/ubuntu/ $CODENAME-security main restricted universe multiverse
+          deb-src ${TUNA_SOURCE}/ubuntu/ $CODENAME-security main restricted universe multiverse
+          EOF
+  
+          sudo apt-get update -y  # 若报错，说明源配置失败
+          sudo apt install libc6-dev-i386 build-essential
+          make test
