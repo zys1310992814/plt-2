@@ -6,6 +6,12 @@
       "type": "cppdbg",
       "request": "launch",
       "args": [],
+       "environment": [
+        {
+          "name": "LD_LIBRARY_PATH",
+          "value": "${workspaceFolder}:${env:LD_LIBRARY_PATH}"
+        }
+      ],
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "${workspaceFolder}",

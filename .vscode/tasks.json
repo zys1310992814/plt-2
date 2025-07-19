@@ -9,15 +9,15 @@
             "command": "bash",
             "args": [
             "-c",
-            //"gcc test_a.c test_b.c test_c.c -m32 -no-pie -g --shared -fPIC -o libtest.so &&gcc test.c -L . -ltest -m32 -no-pie -g -o test"
-            "make clean && make test"
+            "gcc test_a.c test_b.c test_c.c -m32 -no-pie -g --shared -fPIC -o libtest.so &&gcc test.c -L . -ltest -m32 -no-pie -g -o test"
+            //"make clean && make test"
             ],
             "group":"build"
         },
         {
             "label": "make-env",
             "type": "shell",
-            "command": "export LD_LIBRARY_PATH=./",
+            "command": "export LD_LIBRARY_PATH=./:$LD_LIBRARY_PATH",
             "group":"build"
         },
         {
