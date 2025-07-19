@@ -16,15 +16,10 @@ jobs:
 
     - name: Install dependencies
       run: |
-            #!/bin/bash
-
 # Ubuntu 更换清华软件源脚本
 # 作者：技术爱好者
 # 版本：1.2
 # 支持系统：Ubuntu 18.04 LTS 及以上（focal/jammy/noble 等）
-
-set -euo pipefail  # 启用严格错误检查（出错即终止）
-
 # -------------------------- 配置参数 --------------------------
 TUNA_MIRROR=" https://mirrors.tuna.tsinghua.edu.cn/ubuntu "  # 清华源主地址（HTTPS）
 BACKUP_PATH="/etc/apt/sources.list.bak"                   # 原配置备份路径
