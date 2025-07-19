@@ -16,77 +16,19 @@ jobs:
 
     - name: Install dependencies
       run: |
-# Ubuntu 更换清华软件源脚本
-# 作者：技术爱好者
-# 版本：1.2
-# 支持系统：Ubuntu 18.04 LTS 及以上（focal/jammy/noble 等）
-# -------------------------- 配置参数 --------------------------
-TUNA_MIRROR=" https://mirrors.tuna.tsinghua.edu.cn/ubuntu "  # 清华源主地址（HTTPS）
-BACKUP_PATH="/etc/apt/sources.list.bak"                   # 原配置备份路径
-UPDATE_APT=true                                           # 是否更新 apt 缓存（true/false）
+            cat << EOF > /etc/apt/sources.list
+            # 清华大学开源软件镜像站（Ubuntu $codename）
+            deb ${TUNA_MIRROR}/ubuntu/ $codename main restricted universe multiverse
+            deb-src ${TUNA_MIRROR}/ubuntu/ $codename main restricted universe multiverse
 
-# -------------------------- 函数定义 --------------------------
-# 错误提示函数
-error_exit() {
-    echo "错误：$1" >&2
-    exit 1
-}
+            deb ${TUNA_MIRROR}/ubuntu/ $codename-updates main restricted universe multiverse
+            deb-src ${TUNA_MIRROR}/ubuntu/ $codename-updates main restricted universe multiverse
 
-# 检查 root 权限
-check_root() {
-    if [[ $EUID -ne 0 ]]; then
-        error_exit "请以 root 用户或使用 sudo 执行此脚本"
-    fi
-}
+            deb ${TUNA_MIRROR}/ubuntu/ $codename-backports main restricted universe multiverse
+            deb-src ${TUNA_MIRROR}/ubuntu/ $codename-backports main restricted universe multiverse
 
-# 获取 Ubuntu 代号（如 focal/jammy）
-get_ubuntu_codename() {
-    local codename
-    codename=$(lsb_release -cs 2>/dev/null || error_exit "无法获取 Ubuntu 版本，请确认系统为 Ubuntu")
-    # 兼容旧版本（如 18.04 的代号为 bionic）
-    case "$codename" in
-        bionic|focal|jammy|lunar|noble) ;;  # 支持的主流 LTS 版本
-        *) error_exit "不支持的 Ubuntu 版本：$codename" ;;
-    esac
-    echo "$codename"
-}
-
-# -------------------------- 主流程 --------------------------
-check_root  # 检查权限
-
-echo "正在备份原始软件源配置..."
-cp -f /etc/apt/sources.list "$BACKUP_PATH" || error_exit "备份失败，原文件可能无写入权限"
-
-codename=$(get_ubuntu_codename)
-echo "检测到当前 Ubuntu 代号：$codename"
-
-echo "正在生成清华源配置..."
-cat << EOF > /etc/apt/sources.list
-# 清华大学开源软件镜像站（Ubuntu $codename）
-deb ${TUNA_MIRROR}/ubuntu/ $codename main restricted universe multiverse
-deb-src ${TUNA_MIRROR}/ubuntu/ $codename main restricted universe multiverse
-
-deb ${TUNA_MIRROR}/ubuntu/ $codename-updates main restricted universe multiverse
-deb-src ${TUNA_MIRROR}/ubuntu/ $codename-updates main restricted universe multiverse
-
-deb ${TUNA_MIRROR}/ubuntu/ $codename-backports main restricted universe multiverse
-deb-src ${TUNA_MIRROR}/ubuntu/ $codename-backports main restricted universe multiverse
-
-deb ${TUNA_MIRROR}/ubuntu/ $codename-security main restricted universe multiverse
-deb-src ${TUNA_MIRROR}/ubuntu/ $codename-security main restricted universe multiverse
-EOF
-
-echo "软件源配置已替换为清华源，备份文件保存在：$BACKUP_PATH"
-
-if [[ "$UPDATE_APT" == "true" ]]; then
-    echo "正在更新 apt 软件包索引..."
-    apt-get update -y || error_exit "更新 apt 索引失败"
-    echo "apt 索引更新完成！"
-else
-    echo "跳过 apt 索引更新（如需更新请手动执行：sudo apt-get update）"
-fi
-
-echo "脚本执行完成！"
-
+            deb ${TUNA_MIRROR}/ubuntu/ $codename-security main restricted universe multiverse
+            deb-src ${TUNA_MIRROR}/ubuntu/ $codename-security main restricted universe multiverse
+            EOF
             sudo apt install libc6-dev-i386 build-essential
             make test
