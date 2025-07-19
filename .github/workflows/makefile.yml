@@ -45,7 +45,6 @@ jobs:
           make test
 
     - name: Create Release
-      github.ref_type = 'v1'
       uses: softprops/action-gh-release@v1  # 推荐使用此 Action
       with:
         tag_name: 'v1'  # 自动使用触发标签（如 v1.0.0）
