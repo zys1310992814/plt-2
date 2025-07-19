@@ -1,45 +1,44 @@
-There are 36 section headers, starting at offset 0x4084:
+There are 35 section headers, starting at offset 0x39bc:
 
 Section Headers:
   [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
   [ 0]                   NULL            00000000 000000 000000 00      0   0  0
-  [ 1] .interp           PROGBITS        080481b4 0001b4 000013 00   A  0   0  1
-  [ 2] .note.gnu.build-i NOTE            080481c8 0001c8 000024 00   A  0   0  4
-  [ 3] .note.gnu.propert NOTE            080481ec 0001ec 00001c 00   A  0   0  4
-  [ 4] .note.ABI-tag     NOTE            08048208 000208 000020 00   A  0   0  4
-  [ 5] .gnu.hash         GNU_HASH        08048228 000228 000020 04   A  6   0  4
-  [ 6] .dynsym           DYNSYM          08048248 000248 000080 10   A  7   1  4
-  [ 7] .dynstr           STRTAB          080482c8 0002c8 00006c 00   A  0   0  1
-  [ 8] .gnu.version      VERSYM          08048334 000334 000010 02   A  6   0  2
-  [ 9] .gnu.version_r    VERNEED         08048344 000344 000020 00   A  7   1  4
-  [10] .rel.dyn          REL             08048364 000364 000008 08   A  6   0  4
-  [11] .rel.plt          REL             0804836c 00036c 000028 08  AI  6  24  4
-  [12] .init             PROGBITS        08049000 001000 000024 00  AX  0   0  4
-  [13] .plt              PROGBITS        08049030 001030 000060 04  AX  0   0 16
-  [14] .plt.sec          PROGBITS        08049090 001090 000050 10  AX  0   0 16
-  [15] .text             PROGBITS        080490e0 0010e0 0002d9 00  AX  0   0 16
-  [16] .fini             PROGBITS        080493bc 0013bc 000018 00  AX  0   0  4
-  [17] .rodata           PROGBITS        0804a000 002000 000125 00   A  0   0  4
-  [18] .eh_frame_hdr     PROGBITS        0804a128 002128 00004c 00   A  0   0  4
-  [19] .eh_frame         PROGBITS        0804a174 002174 000118 00   A  0   0  4
-  [20] .init_array       INIT_ARRAY      0804bf04 002f04 000004 04  WA  0   0  4
-  [21] .fini_array       FINI_ARRAY      0804bf08 002f08 000004 04  WA  0   0  4
-  [22] .dynamic          DYNAMIC         0804bf0c 002f0c 0000f0 08  WA  7   0  4
-  [23] .got              PROGBITS        0804bffc 002ffc 000004 04  WA  0   0  4
-  [24] .got.plt          PROGBITS        0804c000 003000 000020 04  WA  0   0  4
-  [25] .data             PROGBITS        0804c020 003020 000008 00  WA  0   0  4
-  [26] .bss              NOBITS          0804c028 003028 000004 00  WA  0   0  1
-  [27] .comment          PROGBITS        00000000 003028 00002b 01  MS  0   0  1
-  [28] .debug_aranges    PROGBITS        00000000 003053 000020 00      0   0  1
-  [29] .debug_info       PROGBITS        00000000 003073 00035c 00      0   0  1
-  [30] .debug_abbrev     PROGBITS        00000000 0033cf 0000e1 00      0   0  1
-  [31] .debug_line       PROGBITS        00000000 0034b0 000111 00      0   0  1
-  [32] .debug_str        PROGBITS        00000000 0035c1 0002b4 01  MS  0   0  1
-  [33] .symtab           SYMTAB          00000000 003878 0004a0 10     34  50  4
-  [34] .strtab           STRTAB          00000000 003d18 00020e 00      0   0  1
-  [35] .shstrtab         STRTAB          00000000 003f26 00015d 00      0   0  1
+  [ 1] .interp           PROGBITS        08048194 000194 000013 00   A  0   0  1
+  [ 2] .note.gnu.bu[...] NOTE            080481a8 0001a8 000024 00   A  0   0  4
+  [ 3] .note.ABI-tag     NOTE            080481cc 0001cc 000020 00   A  0   0  4
+  [ 4] .gnu.hash         GNU_HASH        080481ec 0001ec 000020 04   A  5   0  4
+  [ 5] .dynsym           DYNSYM          0804820c 00020c 000080 10   A  6   1  4
+  [ 6] .dynstr           STRTAB          0804828c 00028c 000077 00   A  0   0  1
+  [ 7] .gnu.version      VERSYM          08048304 000304 000010 02   A  5   0  2
+  [ 8] .gnu.version_r    VERNEED         08048314 000314 000030 00   A  6   1  4
+  [ 9] .rel.dyn          REL             08048344 000344 000008 08   A  5   0  4
+  [10] .rel.plt          REL             0804834c 00034c 000028 08  AI  5  22  4
+  [11] .init             PROGBITS        08049000 001000 000020 00  AX  0   0  4
+  [12] .plt              PROGBITS        08049020 001020 000060 04  AX  0   0 16
+  [13] .text             PROGBITS        08049080 001080 000258 00  AX  0   0 16
+  [14] .fini             PROGBITS        080492d8 0012d8 000014 00  AX  0   0  4
+  [15] .rodata           PROGBITS        0804a000 002000 000125 00   A  0   0  4
+  [16] .eh_frame_hdr     PROGBITS        0804a128 002128 00002c 00   A  0   0  4
+  [17] .eh_frame         PROGBITS        0804a154 002154 0000a8 00   A  0   0  4
+  [18] .init_array       INIT_ARRAY      0804bef8 002ef8 000004 04  WA  0   0  4
+  [19] .fini_array       FINI_ARRAY      0804befc 002efc 000004 04  WA  0   0  4
+  [20] .dynamic          DYNAMIC         0804bf00 002f00 0000f0 08  WA  6   0  4
+  [21] .got              PROGBITS        0804bff0 002ff0 000004 04  WA  0   0  4
+  [22] .got.plt          PROGBITS        0804bff4 002ff4 000020 04  WA  0   0  4
+  [23] .data             PROGBITS        0804c014 003014 00000c 00  WA  0   0  4
+  [24] .bss              NOBITS          0804c020 003020 000004 00  WA  0   0  1
+  [25] .comment          PROGBITS        00000000 003020 00002b 01  MS  0   0  1
+  [26] .debug_aranges    PROGBITS        00000000 00304b 000020 00      0   0  1
+  [27] .debug_info       PROGBITS        00000000 00306b 000128 00      0   0  1
+  [28] .debug_abbrev     PROGBITS        00000000 003193 0000b6 00      0   0  1
+  [29] .debug_line       PROGBITS        00000000 003249 00007d 00      0   0  1
+  [30] .debug_str        PROGBITS        00000000 0032c6 0000f2 01  MS  0   0  1
+  [31] .debug_line_str   PROGBITS        00000000 0033b8 000043 01  MS  0   0  1
+  [32] .symtab           SYMTAB          00000000 0033fc 000290 10     33  19  4
+  [33] .strtab           STRTAB          00000000 00368c 0001dd 00      0   0  1
+  [34] .shstrtab         STRTAB          00000000 003869 000151 00      0   0  1
 Key to Flags:
   W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
   L (link order), O (extra OS processing required), G (group), T (TLS),
   C (compressed), x (unknown), o (OS specific), E (exclude),
-  p (processor specific)
+  D (mbind), p (processor specific)

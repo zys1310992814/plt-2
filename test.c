@@ -1,5 +1,5 @@
 #include "test_so.h"
- 
+int ggg = 1000;
 int main(void)
 {
     int *sa=0x0804c00c;  //桩的地址
