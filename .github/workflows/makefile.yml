@@ -16,27 +16,29 @@ jobs:
 
     - name: Install dependencies
       run: |
-          # 清华源主地址（HTTPS）
           TUNA_SOURCE=" https://mirrors.tuna.tsinghua.edu.cn/ubuntu "
-          CODENAME=$(lsb_release -cs)  # 获取 Ubuntu 代号（如 jammy/22.04）
+          CODENAME=$(lsb_release -cs)
 
-          # 生成新的 sources.list 内容
-          sudo tee /etc/apt/sources.list <<EOF
-          # 清华大学开源软件镜像站（Ubuntu $CODENAME）
-          deb ${TUNA_SOURCE}/ubuntu/ $CODENAME main restricted universe multiverse
-          deb-src ${TUNA_SOURCE}/ubuntu/ $CODENAME main restricted universe multiverse
+          # 生成 sources.list（严格格式）
+          sudo tee /etc/apt/sources.list <<'EOF'
+          # 清华大学开源软件镜像站（Ubuntu）
+          deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/  jammy main restricted universe multiverse
+          deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/  jammy main restricted universe multiverse
 
-          deb ${TUNA_SOURCE}/ubuntu/ $CODENAME-updates main restricted universe multiverse
-          deb-src ${TUNA_SOURCE}/ubuntu/ $CODENAME-updates main restricted universe multiverse
+          deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/  jammy-updates main restricted universe multiverse
+          deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/  jammy-updates main restricted universe multiverse
 
-          deb ${TUNA_SOURCE}/ubuntu/ $CODENAME-backports main restricted universe multiverse
-          deb-src ${TUNA_SOURCE}/ubuntu/ $CODENAME-backports main restricted universe multiverse
+          deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/  jammy-backports main restricted universe multiverse
+          deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/  jammy-backports main restricted universe multiverse
 
-          deb ${TUNA_SOURCE}/ubuntu/ $CODENAME-security main restricted universe multiverse
-          deb-src ${TUNA_SOURCE}/ubuntu/ $CODENAME-security main restricted universe multiverse
+          deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/  jammy-security main restricted universe multiverse
+          deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/  jammy-security main restricted universe multiverse
           EOF
+
+          # 强制使用 LF 换行符（避免 Windows 格式）
+          sudo sed -i 's/\r$//' /etc/apt/sources.list
+  
           sudo chmod 644 /etc/apt/sources.list
           sudo chmod 755 /etc/apt
-          sudo apt-get update -y  # 若报错，说明源配置失败
-          sudo apt install libc6-dev-i386 build-essential
-          make test
+          sudo apt-get update -y
+          sudo apt-get install -y curl
