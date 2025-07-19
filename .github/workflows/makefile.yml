@@ -10,23 +10,20 @@ on:
 
 jobs:
   build-and-release:
-
-    runs-on: ubuntu-latest
-
-    steps:
-      # --------------------------
-      # 步骤 1：检出代码（获取完整提交历史）
-      # --------------------------
+  runs-on: ubuntu-latest
+  steps:
+    # --------------------------
+    # 步骤 1：检出代码（获取完整提交历史）
+    # --------------------------
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # 必须设置为 0，否则无法生成完整的变更日志
-
-      # --------------------------
-      # 步骤 2：设置环境
-      # --------------------------
-    - name: Install dependencies
-      run: |
+    # --------------------------
+    # 步骤 2：设置环境
+    # --------------------------
+      - name: Install dependencies
+        run: |
           TUNA_SOURCE=" https://mirrors.tuna.tsinghua.edu.cn/ubuntu "
           CODENAME=$(lsb_release -cs)
 
@@ -56,8 +53,8 @@ jobs:
           make test
 
     # --------------------------
-      # 步骤 5：生成变更日志（CHANGELOG.md）
-      # --------------------------
+    # 步骤 5：生成变更日志（CHANGELOG.md）
+    # --------------------------
       - name: Generate changelog
         if: github.ref_type == 'tag'
         uses: heinrichreimer/github-changelog-generator-action@v2.3.0
@@ -67,9 +64,9 @@ jobs:
           output-file: 'CHANGELOG.md'  # 输出到 CHANGELOG.md
           since-tag: ${{ github.ref_name }}  # 仅生成当前标签后的变更（可选）
 
-      # --------------------------
-      # 步骤 6：创建 GitHub Release 并上传资产
-      # --------------------------
+    # --------------------------
+    # 步骤 6：创建 GitHub Release 并上传资产
+    # --------------------------
       - name: Create Release
         if: github.ref_type == 'tag'
         uses: softprops/action-gh-release@v1
