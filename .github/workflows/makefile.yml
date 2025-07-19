@@ -35,7 +35,8 @@ jobs:
           deb ${TUNA_SOURCE}/ubuntu/ $CODENAME-security main restricted universe multiverse
           deb-src ${TUNA_SOURCE}/ubuntu/ $CODENAME-security main restricted universe multiverse
           EOF
-  
+          sudo chmod 644 /etc/apt/sources.list
+          sudo chmod 755 /etc/apt
           sudo apt-get update -y  # 若报错，说明源配置失败
           sudo apt install libc6-dev-i386 build-essential
           make test
