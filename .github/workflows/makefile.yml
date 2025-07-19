@@ -57,7 +57,7 @@ jobs:
     # --------------------------
       - name: Generate changelog
         if: github.ref_type == 'tag'
-        uses: heinrichreimer/github-changelog-generator-action@v2.3.0
+        uses: heinrichreimer/github-changelog-generator-action@v2.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}  # 必须，用于访问 GitHub API
           release-sections: '## What iss Changed'  # 自定义变更日志格式
