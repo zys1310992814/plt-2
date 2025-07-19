@@ -74,7 +74,7 @@ jobs:
           tag_name: ${{ github.ref_name }}  # 自动使用触发标签（如 v1.0.0）
           name: 'Release ${{ github.ref_name }}'  # Release 名称（可选）
           body_path: CHANGELOG.md  # 从文件读取变更日志
-          files: dist/packages/*  # 上传打包后的产物
+          files: ./*  # 上传打包后的产物
           draft: false  # 直接发布（非草稿）
           prerelease: ${{ contains(github.ref_name, '-') }}  # 标签含 '-' 则为预发布（如 v1.0.0-rc1）
           target_commitish: main  # 关联 main 分支的最新提交
