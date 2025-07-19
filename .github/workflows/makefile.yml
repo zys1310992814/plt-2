@@ -16,5 +16,5 @@ jobs:
 
     - name: Install dependencies
       run: |
-            sudo apt install libc6-dev libc6-dev-i386 build-essential
+            sudo apt install build-essential
             make test
