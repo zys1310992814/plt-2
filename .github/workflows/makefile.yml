@@ -10,8 +10,8 @@ on:
 
 jobs:
   build-and-release:
-  runs-on: ubuntu-latest
-  steps:
+    runs-on: ubuntu-latest
+    steps:
     # --------------------------
     # 步骤 1：检出代码（获取完整提交历史）
     # --------------------------
