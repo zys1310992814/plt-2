@@ -60,7 +60,7 @@ jobs:
         uses: heinrichreimer/github-changelog-generator-action@v2.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}  # 必须，用于访问 GitHub API
-          release-sections: '## What iss Changed'  # 自定义变更日志格式
+          release-sections: '## What is Changed'  # 自定义变更日志格式
           output-file: 'CHANGELOG.md'  # 输出到 CHANGELOG.md
           since-tag: ${{ github.ref_name }}  # 仅生成当前标签后的变更（可选）
 
@@ -74,7 +74,7 @@ jobs:
           tag_name: ${{ github.ref_name }}  # 自动使用触发标签（如 v1.0.0）
           name: 'Release ${{ github.ref_name }}'  # Release 名称（可选）
           body_path: CHANGELOG.md  # 从文件读取变更日志
-          files: ./*  # 上传打包后的产物
+          files: ./test # 上传打包后的产物
           draft: false  # 直接发布（非草稿）
           prerelease: ${{ contains(github.ref_name, '-') }}  # 标签含 '-' 则为预发布（如 v1.0.0-rc1）
           target_commitish: main  # 关联 main 分支的最新提交
