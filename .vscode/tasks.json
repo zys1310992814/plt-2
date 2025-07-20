@@ -22,7 +22,7 @@
         },
         {
             "label": "pre-debug",
-            "dependsOn":["make-env", "make-src"],
+            "dependsOn":["make-src", "make-env"],
             "group": {
                 "kind": "build",
                 "isDefault": true
